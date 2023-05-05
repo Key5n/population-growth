@@ -1,0 +1,50 @@
+root: true
+ignorePatterns:
+  - jest.config.js
+  - next.config.js
+extends:
+  - 'airbnb'
+  # next/core-web-vitalsはnextを包含している？
+  - 'next'
+  - 'next/core-web-vitals'
+  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:import/typescript'
+  - 'plugin:jest/recommended'
+  - 'plugin:jest-dom/recommended'
+  - 'prettier'
+plugins:
+  - 'jest'
+  - 'jest-dom'
+rules:
+  eqeqeq:
+    - error
+    - always
+  no-eval:
+    - error
+  no-implicit-globals:
+    - error
+  no-multi-spaces:
+    - error
+  prefer-const: error
+  no-use-before-define: error
+  no-var: error
+
+  # import rules
+  import/order:
+    - error
+    - newlines-between: always
+      alphabetize:
+        order: asc
+        caseInsensitive: true
+  import/prefer-default-export:
+    - off
+  import/extensions:
+    - off
+
+  # react rules
+  react/jsx-filename-extension:
+    - 1
+    - extensions:
+        - '.jsx'
+        - '.tsx'
+  react/jsx-props-no-spreading: 'off'
