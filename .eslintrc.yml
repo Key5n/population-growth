@@ -40,6 +40,11 @@ rules:
     - off
   import/extensions:
     - off
+  import/no-extraneous-dependencies:
+    - 'error'
+    - devDependencies:
+        - '**/*.stories.*'
+      peerDependencies: true
 
   # react rules
   react/jsx-filename-extension:
