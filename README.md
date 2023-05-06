@@ -33,12 +33,89 @@ Controllerからグラフに表示する都道府県をチェック;
 
 ## 状態
 
-- API から取得したデータ
-- グラフの種類:
-  - "Total"
-  - "Young"
-  - "WorkingAge"
-  - "Elderly"
+1. グラフの種類:
+
+- "Total"
+- "Young"
+- "WorkingAge"
+- "Elderly"
+
+2. API から取得したデータを加工したもの
+
+```
+[
+  {
+    "prefCode": 1,
+    "prefName": "北海道",
+    "boundaryYear": 2020,
+    "data": [
+      {
+        "label": "総人口",
+        "data": [
+          {
+            "year": 1980,
+            "value": 〇〇,
+          },
+          {
+            "year": 1985,
+            "value": △△
+          },
+          ...
+        ],
+      }
+      {
+        "label": "年少人口",
+        "data": [
+          {
+            "year": 1980,
+            "value": □□,
+          },
+          {
+            "year": 1985,
+            "value": xx
+          },
+          ...
+        ],
+      }
+    ] | null
+  },
+  {
+    "prefCode": 2,
+    "prefName": "青森件",
+    "boundaryYear": 2020,
+    "data": [
+      {
+        "label": "総人口",
+        "data": [
+          {
+            "year": 1980,
+            "value": 〇〇,
+          },
+          {
+            "year": 1985,
+            "value": △△
+          },
+          ...
+        ],
+      }
+      {
+        "label": "年少人口",
+        "data": [
+          {
+            "year": 1980,
+            "value": □□,
+          },
+          {
+            "year": 1985,
+            "value": xx
+          },
+          ...
+        ],
+      }
+    ] | null
+  }
+]
+```
 
 # Contribution
 
