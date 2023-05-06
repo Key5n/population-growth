@@ -10,7 +10,7 @@ type Props = {
 
 export default function PopulationProvider({ children }: Props) {
 	const [prefSources, setPrefSources] = useState<PrefSource[]>([]);
-	const setPrefSource = useCallback(
+	const updatePrefSource = useCallback(
 		(newPrefSource: PrefSource) => {
 			setPrefSources(
 				prefSources.map((oldPrefSource) =>
@@ -22,9 +22,12 @@ export default function PopulationProvider({ children }: Props) {
 		},
 		[prefSources]
 	);
+	const updatePrefSources = useCallback((newPrefSources: PrefSource[]) => {
+		setPrefSources(newPrefSources);
+	}, []);
 	const value = useMemo(
-		() => ({ prefSources, setPrefSource }),
-		[prefSources, setPrefSource]
+		() => ({ prefSources, updatePrefSource, updatePrefSources }),
+		[prefSources, updatePrefSource, updatePrefSources]
 	);
 	return (
 		<PopulationContext.Provider value={value}>

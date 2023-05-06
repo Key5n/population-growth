@@ -4,7 +4,8 @@ import { PrefSource } from '@/types/dataType';
 
 export type PopulationGrowthContextType = {
 	prefSources: PrefSource[];
-	setPrefSource: (prefSource: PrefSource) => void;
+	updatePrefSource: (prefSource: PrefSource) => void;
+	updatePrefSources: (prefSources: PrefSource[]) => void;
 };
 
 export const PopulationContext =
