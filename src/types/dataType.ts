@@ -1,16 +1,20 @@
-export interface Data {
+export type Data = {
 	year: number;
 	value: number;
-}
+};
 
-export interface PopulationData {
+export type LabeledPopulationData = {
 	label: string;
 	data: Data[];
-}
+};
 
-export interface PrefSource {
+export type BasicPrefInfo = {
 	prefCode: number | null;
 	prefName: string | null;
+};
+
+export type PrefSource = BasicPrefInfo & {
 	boundaryYear: number | null;
-	data: PopulationData[] | null;
-}
+	data: LabeledPopulationData[] | null;
+	isSelected: boolean;
+};
