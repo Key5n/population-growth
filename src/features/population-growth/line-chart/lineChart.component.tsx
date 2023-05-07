@@ -9,7 +9,7 @@ import {
 	Tooltip,
 } from 'recharts';
 
-import { useWindowDimensions } from './useWindowDimensions';
+import { useWindowWidth } from './useWindowDimensions';
 
 import { PrefSource } from '@/types/dataType';
 
@@ -45,7 +45,7 @@ function sortArray(array: GraphData) {
 }
 
 export function LineChartGraph({ prefSources }: Props) {
-	const { width } = useWindowDimensions();
+	const { windowWidth } = useWindowWidth();
 	const data: GraphData = prefSources
 		.map((prefSource) => {
 			const boundaryYear = prefSource.boundaryYear || new Date().getFullYear();
@@ -72,7 +72,7 @@ export function LineChartGraph({ prefSources }: Props) {
 	const da = mergeObjects(data);
 	const d = sortArray(da);
 	return (
-		<LineChart width={width * 0.8} height={500} data={d}>
+		<LineChart width={windowWidth * 0.8} height={500} data={d}>
 			<CartesianGrid strokeDasharray="2 2" />
 			<XAxis dataKey="year" interval="preserveStartEnd" />
 			<YAxis interval="preserveStartEnd" />
