@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react';
 
+import { PopulationProvider } from '../population-growth/dataProvider';
 import { Header } from '../ui/Header';
 import { Loading } from '../ui/Loading';
 import { LoadingProvider } from '../ui/Loading/LoadingProvider';
@@ -17,17 +18,19 @@ export function BasicLayout({ children, headerProps }: LayoutProps) {
 	return (
 		<LoadingProvider>
 			<NavigationProvider>
-				<div className={styles.module}>
-					<Header {...headerProps} />
-					<div className={styles.layout}>
-						<aside>
-							<NavigationLinks />
-						</aside>
-						{children}
+				<PopulationProvider>
+					<div className={styles.module}>
+						<Header {...headerProps} />
+						<div className={styles.layout}>
+							<aside>
+								<NavigationLinks />
+							</aside>
+							{children}
+						</div>
+						<Loading />
+						{/* <Notification /> */}
 					</div>
-					<Loading />
-					{/* <Notification /> */}
-				</div>
+				</PopulationProvider>
 			</NavigationProvider>
 		</LoadingProvider>
 	);

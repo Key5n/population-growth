@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import PopulationProvider from './dataProvider';
+import { PopulationProvider } from './dataProvider';
 import { PopulationGrowth } from './PopulationGrowth.page';
 
 type T = typeof PopulationGrowth;

@@ -8,7 +8,7 @@ type Props = {
 	children: ReactNode;
 };
 
-export default function PopulationProvider({ children }: Props) {
+export function PopulationProvider({ children }: Props) {
 	const [prefSources, setPrefSources] = useState<PrefSource[]>([]);
 	const updatePrefSource = useCallback(
 		(newPrefSource: PrefSource) => {
