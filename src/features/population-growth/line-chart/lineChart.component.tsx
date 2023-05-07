@@ -9,6 +9,8 @@ import {
 	Tooltip,
 } from 'recharts';
 
+import { useWindowDimensions } from './useWindowDimensions';
+
 import { PrefSource } from '@/types/dataType';
 
 type Props = {
@@ -43,6 +45,7 @@ function sortArray(array: GraphData) {
 }
 
 export function LineChartGraph({ prefSources }: Props) {
+	const { width } = useWindowDimensions();
 	const data: GraphData = prefSources
 		.map((prefSource) => {
 			const boundaryYear = prefSource.boundaryYear || new Date().getFullYear();
@@ -69,11 +72,11 @@ export function LineChartGraph({ prefSources }: Props) {
 	const da = mergeObjects(data);
 	const d = sortArray(da);
 	return (
-		<LineChart width={600} height={500} data={d}>
+		<LineChart width={width * 0.8} height={500} data={d}>
 			<CartesianGrid strokeDasharray="2 2" />
 			<XAxis dataKey="year" interval="preserveStartEnd" />
 			<YAxis interval="preserveStartEnd" />
-			<Legend />
+			<Legend verticalAlign="top" />
 			<Line
 				type="monotone"
 				dataKey="北海道"
@@ -83,7 +86,7 @@ export function LineChartGraph({ prefSources }: Props) {
 			<Line
 				type="monotone"
 				dataKey="青森県"
-				stroke="#8884d8"
+				stroke="#888000"
 				activeDot={{ r: 8 }}
 			/>
 			<Tooltip />

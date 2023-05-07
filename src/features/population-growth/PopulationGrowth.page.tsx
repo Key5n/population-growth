@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { PopulationContext, PopulationGrowthContextType } from './dataContext';
 import { LineChartGraph } from './line-chart';
+import styles from './styles.module.css';
 
 import { api } from '@/lib/api';
 import { useContextAndErrorIfNull } from '@/lib/context/useContextAndErrorIfNull';
@@ -57,7 +58,7 @@ export function PopulationGrowth() {
 	}, [updatePrefSources]);
 	const data = prefSources.filter((prefSource) => prefSource.data !== null);
 	return (
-		<main>
+		<main className={styles.module}>
 			<LineChartGraph prefSources={data} />
 		</main>
 	);
