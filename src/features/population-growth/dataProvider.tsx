@@ -29,6 +29,7 @@ export default function PopulationProvider({ children }: Props) {
 		() => ({ prefSources, updatePrefSource, updatePrefSources }),
 		[prefSources, updatePrefSource, updatePrefSources]
 	);
+
 	return (
 		<PopulationContext.Provider value={value}>
 			{children}
