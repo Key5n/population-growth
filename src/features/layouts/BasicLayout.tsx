@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react';
 
+import { ChartTypeProvider } from '../population-growth/controller/chart-type-selection/ChartTypeSelectionProvider';
 import { PopulationProvider } from '../population-growth/PopulationProvider';
 import { Header } from '../ui/Header';
 import { Loading } from '../ui/Loading';
@@ -18,17 +19,19 @@ export function BasicLayout({ children, headerProps }: LayoutProps) {
 	return (
 		<LoadingProvider>
 			<NavigationProvider>
-				<PopulationProvider>
-					<div className={styles.module}>
-						<Header {...headerProps} />
-						<div className={styles.layout}>
-							<NavigationLinks />
-							{children}
+				<ChartTypeProvider>
+					<PopulationProvider>
+						<div className={styles.module}>
+							<Header {...headerProps} />
+							<div className={styles.layout}>
+								<NavigationLinks />
+								{children}
+							</div>
+							<Loading />
+							{/* <Notification /> */}
 						</div>
-						<Loading />
-						{/* <Notification /> */}
-					</div>
-				</PopulationProvider>
+					</PopulationProvider>
+				</ChartTypeProvider>
 			</NavigationProvider>
 		</LoadingProvider>
 	);

@@ -1,5 +1,11 @@
+import {
+	ChartType,
+	ChartTypeContext,
+} from '../controller/chart-type-selection/ChartTypeSelectionContext';
+
 import { useWindowWidth } from './useWindowDimensions';
 
+import { useContextAndErrorIfNull } from '@/lib/context/useContextAndErrorIfNull';
 import { PrefSource } from '@/types/dataType';
 
 type GraphData = ({
@@ -29,14 +35,14 @@ function sortArray(array: GraphData) {
 	return result;
 }
 
-function formatData(selectedPrefSources: PrefSource[]) {
+function formatData(selectedPrefSources: PrefSource[], chartType: ChartType) {
 	const data: GraphData = selectedPrefSources
 		.map((prefSource) => {
 			const boundaryYear = prefSource.boundaryYear || new Date().getFullYear();
 
 			const targetPopulation =
 				prefSource.data?.filter(
-					(labeledPopulationData) => labeledPopulationData.label === '総人口'
+					(labeledPopulationData) => labeledPopulationData.label === chartType
 				) || [];
 			const populationData = targetPopulation.map((labeledPopulationData) => {
 				const dataWithoutExpectationValues = labeledPopulationData.data.filter(
@@ -60,10 +66,11 @@ function formatData(selectedPrefSources: PrefSource[]) {
 
 export function useLineChart(prefSources: PrefSource[]) {
 	const { windowWidth } = useWindowWidth();
+	const { chartType } = useContextAndErrorIfNull(ChartTypeContext);
 	const selectedPrefSources = prefSources.filter(
 		(prefSource) => prefSource.isSelected
 	);
-	const formattedData = formatData(selectedPrefSources);
+	const formattedData = formatData(selectedPrefSources, chartType);
 	const bestWidth = windowWidth >= 900 ? 500 : windowWidth - 16;
 	return { bestWidth, selectedPrefSources, formattedData };
 }

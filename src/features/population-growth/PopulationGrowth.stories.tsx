@@ -4,6 +4,7 @@ import { BasicLayout } from '../layouts/BasicLayout';
 import { LoadingProvider } from '../ui/Loading/LoadingProvider';
 import { NavigationProvider } from '../ui/NavigationLinks/NavigationProvider';
 
+import { ChartTypeProvider } from './controller/chart-type-selection/ChartTypeSelectionProvider';
 import { PopulationGrowth } from './PopulationGrowth.page';
 import { PopulationProvider } from './PopulationProvider';
 
@@ -22,9 +23,11 @@ export const Default: Story = {
 		(StoryComponent) => (
 			<LoadingProvider>
 				<NavigationProvider>
-					<PopulationProvider initialValue={prefSources}>
-						<StoryComponent />
-					</PopulationProvider>
+					<ChartTypeProvider>
+						<PopulationProvider initialValue={prefSources}>
+							<StoryComponent />
+						</PopulationProvider>
+					</ChartTypeProvider>
 				</NavigationProvider>
 			</LoadingProvider>
 		),
