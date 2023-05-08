@@ -2,15 +2,20 @@ root: true
 ignorePatterns:
   - jest.config.js
   - next.config.js
+parserOptions:
+  project: ./tsconfig.eslint.json
 extends:
   - 'airbnb'
+  - 'airbnb-typescript'
   # next/core-web-vitalsはnextを包含している？
   - 'next'
   - 'next/core-web-vitals'
   - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:@typescript-eslint/recommended-requiring-type-checking'
   - 'plugin:import/typescript'
   - 'plugin:jest/recommended'
   - 'plugin:jest-dom/recommended'
+  - 'plugin:storybook/recommended'
   - 'prettier'
 plugins:
   - 'jest'
@@ -28,6 +33,9 @@ rules:
   prefer-const: error
   no-use-before-define: error
   no-var: error
+
+  #jsx-a11y
+  jsx-a11y/label-has-associated-control: 'off'
 
   # import rules
   import/order:
@@ -54,3 +62,5 @@ rules:
         - '.tsx'
   react/jsx-props-no-spreading: 'off'
   react/function-component-definition: 'off'
+  prefer-arrow-callback: 'off'
+  react/require-default-props: 'off'
