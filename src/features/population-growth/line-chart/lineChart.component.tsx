@@ -12,6 +12,7 @@ import {
 import styles from './styles.module.css';
 import { useLineChart } from './useLineChart';
 
+import { colors } from '@/lib/colorCodes';
 import { PrefSource } from '@/types/dataType';
 
 type Props = {
@@ -21,6 +22,7 @@ type Props = {
 export function LineChartGraph({ prefSources }: Props) {
 	const { bestWidth, selectedPrefSources, formattedData } =
 		useLineChart(prefSources);
+
 	return (
 		<LineChart
 			width={bestWidth}
@@ -29,14 +31,31 @@ export function LineChartGraph({ prefSources }: Props) {
 			className={styles.module}
 		>
 			<CartesianGrid strokeDasharray="2 2" />
-			<XAxis dataKey="year" interval="preserveStartEnd" />
-			<YAxis interval="preserveStartEnd" />
+			<XAxis
+				dataKey="year"
+				interval="preserveStartEnd"
+				label={{ value: '年', offset: -5, position: 'insideBottomRight' }}
+			/>
+			<YAxis
+				interval="preserveStartEnd"
+				tickFormatter={(value: number) => {
+					const v = value;
+					return `${v.toLocaleString()}`;
+				}}
+				width={100}
+				label={{
+					value: '人口数（人）',
+					angle: -90,
+					position: 'insideLeft',
+				}}
+			/>
 			<Legend verticalAlign="top" />
-			{selectedPrefSources.map((prefSource) => (
+			{selectedPrefSources.map((prefSource, i) => (
 				<Line
 					dataKey={prefSource.prefName ?? 'undefined'}
 					type="monotone"
 					key={prefSource.prefCode}
+					stroke={colors[i % colors.length]}
 				/>
 			))}
 			<Tooltip />
