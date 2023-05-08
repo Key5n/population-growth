@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react';
 
-import { PopulationProvider } from '../population-growth/dataProvider';
+import { PopulationProvider } from '../population-growth/PopulationProvider';
 import { Header } from '../ui/Header';
 import { Loading } from '../ui/Loading';
 import { LoadingProvider } from '../ui/Loading/LoadingProvider';
@@ -22,9 +22,7 @@ export function BasicLayout({ children, headerProps }: LayoutProps) {
 					<div className={styles.module}>
 						<Header {...headerProps} />
 						<div className={styles.layout}>
-							<aside>
-								<NavigationLinks />
-							</aside>
+							<NavigationLinks />
 							{children}
 						</div>
 						<Loading />

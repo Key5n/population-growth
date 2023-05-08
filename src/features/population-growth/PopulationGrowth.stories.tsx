@@ -1,9 +1,15 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { PopulationProvider } from './dataProvider';
-import { PopulationGrowth } from './PopulationGrowth.page';
+import { BasicLayout } from '../layouts/BasicLayout';
+import { LoadingProvider } from '../ui/Loading/LoadingProvider';
+import { NavigationProvider } from '../ui/NavigationLinks/NavigationProvider';
 
-type T = typeof PopulationGrowth;
+import { PopulationGrowth } from './PopulationGrowth.page';
+import { PopulationProvider } from './PopulationProvider';
+
+import { prefSources } from '@/tests/valueForMocks';
+
+type T = typeof BasicLayout;
 type Story = StoryObj<T>;
 
 export default {
@@ -14,9 +20,13 @@ export default {
 export const Default: Story = {
 	decorators: [
 		(StoryComponent) => (
-			<PopulationProvider>
-				<StoryComponent />
-			</PopulationProvider>
+			<LoadingProvider>
+				<NavigationProvider>
+					<PopulationProvider initialValue={prefSources}>
+						<StoryComponent />
+					</PopulationProvider>
+				</NavigationProvider>
+			</LoadingProvider>
 		),
 	],
 };

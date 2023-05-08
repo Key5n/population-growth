@@ -4,13 +4,16 @@
 	min-height: 100vh;
 }
 
+@media screen and (max-width: 899.9px) {
+	.layout {
+		margin-bottom: 64px;
+	}
+}
+
 @media screen and (min-width: 900px) {
 	.layout {
 		display: flex;
 		align-items: stretch;
-		justify-content: space-between;
-		max-width: 1000px;
-		min-height: calc(100vh - 44px);
-		margin: 0 auto;
+		min-height: 100vh;
 	}
 }

@@ -7,7 +7,7 @@ type Props = ComponentPropsWithoutRef<'header'>;
 export function Header({ children, ...props }: Props) {
 	return (
 		<header {...props} className={styles.module}>
-			{children}
+			<h1>{children}</h1>
 			<Hamburger />
 		</header>
 	);

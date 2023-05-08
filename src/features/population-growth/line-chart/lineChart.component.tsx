@@ -9,86 +9,55 @@ import {
 	Tooltip,
 } from 'recharts';
 
-import { useWindowWidth } from './useWindowDimensions';
+import styles from './styles.module.css';
+import { useLineChart } from './useLineChart';
 
+import { colors } from '@/lib/colorCodes';
 import { PrefSource } from '@/types/dataType';
 
 type Props = {
 	prefSources: PrefSource[];
 };
 
-type GraphData = ({
-	year: number;
-} & Record<string, number>)[];
-
-function mergeObjects(array: GraphData): GraphData {
-	const result: GraphData = [];
-
-	array.forEach((obj) => {
-		const obj1Index = result.findIndex((obj1) => obj1.year === obj.year);
-
-		if (obj1Index !== -1) {
-			result[obj1Index] = { ...result[obj1Index], ...obj };
-		} else {
-			result.push(obj);
-		}
-	});
-
-	return result;
-}
-
-function sortArray(array: GraphData) {
-	const result = [...array];
-	result.sort((a, b) => a.year - b.year);
-
-	return result;
-}
-
 export function LineChartGraph({ prefSources }: Props) {
-	const { windowWidth } = useWindowWidth();
-	const data: GraphData = prefSources
-		.map((prefSource) => {
-			const boundaryYear = prefSource.boundaryYear || new Date().getFullYear();
+	const { bestWidth, selectedPrefSources, formattedData } =
+		useLineChart(prefSources);
 
-			const targetPopulation =
-				prefSource.data?.filter(
-					(labeledPopulationData) => labeledPopulationData.label === '総人口'
-				) || [];
-			const populationData = targetPopulation.map((labeledPopulationData) => {
-				const dataWithoutExpectationValues = labeledPopulationData.data.filter(
-					(population) => population.year <= boundaryYear
-				);
-				const namedPopulation = dataWithoutExpectationValues.map((prev) => ({
-					year: prev.year,
-					[prefSource.prefName ?? 'why']: prev.value,
-				}));
-				return namedPopulation;
-			});
-			return [...populationData];
-		})
-		.flat()
-		.flat();
-
-	const da = mergeObjects(data);
-	const d = sortArray(da);
 	return (
-		<LineChart width={windowWidth * 0.8} height={500} data={d}>
+		<LineChart
+			width={bestWidth}
+			height={500}
+			data={formattedData}
+			className={styles.module}
+		>
 			<CartesianGrid strokeDasharray="2 2" />
-			<XAxis dataKey="year" interval="preserveStartEnd" />
-			<YAxis interval="preserveStartEnd" />
+			<XAxis
+				dataKey="year"
+				interval="preserveStartEnd"
+				label={{ value: '年', offset: -5, position: 'insideBottomRight' }}
+			/>
+			<YAxis
+				interval="preserveStartEnd"
+				tickFormatter={(value: number) => {
+					const v = value;
+					return `${v.toLocaleString()}`;
+				}}
+				width={100}
+				label={{
+					value: '人口数（人）',
+					angle: -90,
+					position: 'insideLeft',
+				}}
+			/>
 			<Legend verticalAlign="top" />
-			<Line
-				type="monotone"
-				dataKey="北海道"
-				stroke="#8884d8"
-				activeDot={{ r: 8 }}
-			/>
-			<Line
-				type="monotone"
-				dataKey="青森県"
-				stroke="#888000"
-				activeDot={{ r: 8 }}
-			/>
+			{selectedPrefSources.map((prefSource, i) => (
+				<Line
+					dataKey={prefSource.prefName ?? 'undefined'}
+					type="monotone"
+					key={prefSource.prefCode}
+					stroke={colors[i % colors.length]}
+				/>
+			))}
 			<Tooltip />
 		</LineChart>
 	);
