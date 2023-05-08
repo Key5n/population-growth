@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { LoadingContext } from '../ui/Loading/LoadingContext';
+
 import { PopulationContext, PopulationGrowthContextType } from './dataContext';
 import { LineChartGraph } from './line-chart';
 import styles from './styles.module.css';
@@ -15,6 +17,11 @@ import { PrefSource } from '@/types/dataType';
 export function PopulationGrowth() {
 	const { updatePrefSources, prefSources } =
 		useContextAndErrorIfNull<PopulationGrowthContextType>(PopulationContext);
+	const { setLoadingState } = useContextAndErrorIfNull(LoadingContext);
+
+	useEffect(() => {
+		setLoadingState(false);
+	}, [setLoadingState]);
 
 	useEffect(() => {
 		(async () => {

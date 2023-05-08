@@ -7,9 +7,10 @@ import styles from './styles.module.css';
 import { useContextAndErrorIfNull } from '@/lib/context/useContextAndErrorIfNull';
 
 export function NavigationLinks() {
-	const isOpen = useContextAndErrorIfNull(NavigationContext);
+	const { isNavigationOpen } = useContextAndErrorIfNull(NavigationContext);
+
 	return (
-		<ul className={clsx(styles.navLinks, isOpen && styles.expanded)}>
+		<ul className={clsx(styles.navLinks, isNavigationOpen && styles.expanded)}>
 			<li>
 				<Link href="/">ホーム</Link>
 			</li>
