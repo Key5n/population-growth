@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef, ReactElement, ReactNode } from 'react';
 
-import { PopulationProvider } from '../population-growth/dataProvider';
+import { PopulationProvider } from '../population-growth/PopulationProvider';
 import { Header } from '../ui/Header';
 import { Loading } from '../ui/Loading';
 import { LoadingProvider } from '../ui/Loading/LoadingProvider';

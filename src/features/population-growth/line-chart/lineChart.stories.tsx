@@ -11,8 +11,8 @@ type Story = StoryObj<T>;
 const nullPrefSources: PrefSource[] = [
 	{
 		boundaryYear: null,
-		prefCode: null,
-		prefName: null,
+		prefCode: 13,
+		prefName: '東京都',
 		data: null,
 		isSelected: false,
 	},

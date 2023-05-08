@@ -9,8 +9,8 @@ export type LabeledPopulationData = {
 };
 
 export type BasicPrefInfo = {
-	prefCode: number | null;
-	prefName: string | null;
+	prefCode: number;
+	prefName: string;
 };
 
 export type PrefSource = BasicPrefInfo & {

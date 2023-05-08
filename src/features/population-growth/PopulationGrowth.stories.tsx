@@ -4,8 +4,8 @@ import { BasicLayout } from '../layouts/BasicLayout';
 import { LoadingProvider } from '../ui/Loading/LoadingProvider';
 import { NavigationProvider } from '../ui/NavigationLinks/NavigationProvider';
 
-import { PopulationProvider } from './dataProvider';
 import { PopulationGrowth } from './PopulationGrowth.page';
+import { PopulationProvider } from './PopulationProvider';
 
 import { prefSources } from '@/tests/valueForMocks';
 
