@@ -17,6 +17,11 @@ export function NavigationLinks() {
 				<li>
 					<Link href="/">ホーム</Link>
 				</li>
+				<li>
+					<Link href="https://github.com/Key5n/population-growth">
+						ソースコード
+					</Link>
+				</li>
 			</ul>
 		</aside>
 	);
