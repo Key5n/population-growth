@@ -38,10 +38,10 @@ export function PopulationGrowth() {
 				},
 			};
 			// 初期値は北海道
-			const CodeOfHokkaido = 1;
+			const CodeOfTokyo = 13;
 			const basicInformationEndPoint =
 				'https://opendata.resas-portal.go.jp/api/v1/prefectures';
-			const populationPrefAPIEndPoint = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${CodeOfHokkaido}`;
+			const populationPrefAPIEndPoint = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${CodeOfTokyo}`;
 			const res = await Promise.all([
 				api<BasicPrefInfoAPIResponse>(basicInformationEndPoint, option),
 				api<PopulationPrefAPIResponse>(populationPrefAPIEndPoint, option),
@@ -51,13 +51,13 @@ export function PopulationGrowth() {
 			const populationPrefRespnse = res[1];
 			const basicData: PrefSource[] = basicPrefInfoResponse.result.map(
 				(prefInfo) => {
-					const isHokkaido = prefInfo.prefCode === CodeOfHokkaido;
+					const isTokyo = prefInfo.prefCode === CodeOfTokyo;
 					return {
 						prefCode: prefInfo.prefCode,
 						prefName: prefInfo.prefName,
 						boundaryYear: populationPrefRespnse.result.boundaryYear,
-						data: isHokkaido ? populationPrefRespnse.result.data : null,
-						isSelected: false,
+						data: isTokyo ? populationPrefRespnse.result.data : null,
+						isSelected: isTokyo,
 					};
 				}
 			);

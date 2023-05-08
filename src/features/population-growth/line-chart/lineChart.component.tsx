@@ -47,7 +47,10 @@ function sortArray(array: GraphData) {
 
 export function LineChartGraph({ prefSources }: Props) {
 	const { windowWidth } = useWindowWidth();
-	const data: GraphData = prefSources
+	const selectedPrefSources = prefSources.filter(
+		(prefSource) => prefSource.isSelected
+	);
+	const data: GraphData = selectedPrefSources
 		.map((prefSource) => {
 			const boundaryYear = prefSource.boundaryYear || new Date().getFullYear();
 
@@ -84,18 +87,13 @@ export function LineChartGraph({ prefSources }: Props) {
 			<XAxis dataKey="year" interval="preserveStartEnd" />
 			<YAxis interval="preserveStartEnd" />
 			<Legend verticalAlign="top" />
-			<Line
-				type="monotone"
-				dataKey="北海道"
-				stroke="#8884d8"
-				activeDot={{ r: 8 }}
-			/>
-			<Line
-				type="monotone"
-				dataKey="青森県"
-				stroke="#888000"
-				activeDot={{ r: 8 }}
-			/>
+			{selectedPrefSources.map((prefSource) => (
+				<Line
+					dataKey={prefSource.prefName ?? 'undefined'}
+					type="monotone"
+					key={prefSource.prefCode}
+				/>
+			))}
 			<Tooltip />
 		</LineChart>
 	);
