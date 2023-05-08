@@ -1,0 +1,5 @@
+.module {
+	margin: 16px;
+	background-color: rgb(var(--background-start-rgb));
+	border-radius: 4px;
+}

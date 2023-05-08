@@ -1,3 +1,4 @@
+import { ChartTypeSelection } from './chart-type-selection';
 import styles from './styles.module.css';
 import { useController } from './useController';
 
@@ -27,6 +28,10 @@ export function Controller() {
 						</Checkbox>
 					);
 				})}
+			</div>
+			<div>
+				表示する図の切り替え
+				<ChartTypeSelection />
 			</div>
 		</div>
 	);

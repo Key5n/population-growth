@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { PopulationProvider } from '../PopulationProvider';
 
+import { ChartTypeProvider } from './chart-type-selection/ChartTypeSelectionProvider';
 import { Controller } from './Controller.component';
 
 import { prefSources } from '@/tests/valueForMocks';
@@ -17,9 +18,11 @@ export default {
 export const Default: Story = {
 	decorators: [
 		(StoryComponent) => (
-			<PopulationProvider initialValue={prefSources}>
-				<StoryComponent />
-			</PopulationProvider>
+			<ChartTypeProvider>
+				<PopulationProvider initialValue={prefSources}>
+					<StoryComponent />
+				</PopulationProvider>
+			</ChartTypeProvider>
 		),
 	],
 };
