@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { LoadingContext } from '../ui/Loading/LoadingContext';
 
+import { Controller } from './controller';
 import { PopulationContext, PopulationGrowthContextType } from './dataContext';
 import { LineChartGraph } from './line-chart';
 import styles from './styles.module.css';
@@ -61,12 +62,15 @@ export function PopulationGrowth() {
 				}
 			);
 			updatePrefSources(basicData);
-		})();
+		})().catch(() => {
+			throw new Error(`Cannot fetch from RESAS`);
+		});
 	}, [updatePrefSources]);
 	const data = prefSources.filter((prefSource) => prefSource.data !== null);
 	return (
 		<main className={styles.module}>
 			<LineChartGraph prefSources={data} />
+			<Controller />
 		</main>
 	);
 }

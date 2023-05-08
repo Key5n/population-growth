@@ -1,22 +1,20 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { PopulationProvider } from './dataProvider';
+import { BasicLayout } from '../layouts/BasicLayout';
+
 import { PopulationGrowth } from './PopulationGrowth.page';
 
-type T = typeof PopulationGrowth;
+type T = typeof BasicLayout;
 type Story = StoryObj<T>;
 
 export default {
 	title: 'Page/PopulationGrowth',
-	component: PopulationGrowth,
+	component: () => (
+		<>
+			BasicLayout(
+			<PopulationGrowth />)
+		</>
+	),
 } satisfies Meta<T>;
 
-export const Default: Story = {
-	decorators: [
-		(StoryComponent) => (
-			<PopulationProvider>
-				<StoryComponent />
-			</PopulationProvider>
-		),
-	],
-};
+export const Default: Story = {};

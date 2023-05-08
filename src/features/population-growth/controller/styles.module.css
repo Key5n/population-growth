@@ -1,0 +1,28 @@
+.module {
+	margin: 8px 16px 0;
+}
+
+.prefectures {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.headline {
+	background: radial-gradient(
+			100% 1555.86% at 100% 0%,
+			#6dbce8 0%,
+			#de5bff 0.01%,
+			#79ffef 100%
+		)
+		/* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+@media screen and (min-width: 900px) {
+	.prefectures {
+		/* width = 画面幅 - グラフ幅 - サイドバーの幅 - チェックボックス群のマージン  */
+		width: calc(100vw - 500px - 216px - 16px);
+	}
+}

@@ -22,7 +22,7 @@
 	display: inline-block;
 	width: 100%;
 	line-height: 44px;
-	color: #333;
+	color: rgb(var(--foreground-rgb));
 	text-decoration: none;
 }
 
@@ -30,7 +30,7 @@
 	.navLinks li {
 		display: inline-block;
 		text-align: center;
-		background-color: #fff;
+		background-color: rgb(var(--background-start-rgb));
 		transition: transform 0.1s ease-out;
 	}
 
@@ -71,7 +71,7 @@
 @media screen and (min-width: 900px) {
 	.navLinks {
 		position: static;
-		width: 300px;
+		width: 200px;
 		margin-left: 16px;
 		font-size: 16px;
 		border: 2px solid var(--orange);
@@ -88,5 +88,9 @@
 
 	.navLinks a {
 		text-align: start;
+	}
+
+	.module {
+		border-right: 1px solid gray;
 	}
 }

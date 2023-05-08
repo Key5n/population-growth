@@ -1,0 +1,7 @@
+@media screen and (min-width: 900px) {
+	.module {
+		display: flex;
+		flex-grow: 1;
+		margin: 8px;
+	}
+}

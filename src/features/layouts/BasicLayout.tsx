@@ -22,9 +22,7 @@ export function BasicLayout({ children, headerProps }: LayoutProps) {
 					<div className={styles.module}>
 						<Header {...headerProps} />
 						<div className={styles.layout}>
-							<aside>
-								<NavigationLinks />
-							</aside>
+							<NavigationLinks />
 							{children}
 						</div>
 						<Loading />

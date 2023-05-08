@@ -1,4 +1,6 @@
 .module {
+	position: relative;
+	z-index: 3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -6,6 +8,5 @@
 	height: 44px;
 	font-family: 'RocknRoll One', sans-serif;
 	font-size: 20px;
-	color: black;
-	background-color: white;
+	background-color: rgb(var(--background-start-rgb));
 }

@@ -6,10 +6,11 @@ import { PrefSource } from '@/types/dataType';
 
 type Props = {
 	children: ReactNode;
+	initialValue?: PrefSource[];
 };
 
-export function PopulationProvider({ children }: Props) {
-	const [prefSources, setPrefSources] = useState<PrefSource[]>([]);
+export function PopulationProvider({ children, initialValue = [] }: Props) {
+	const [prefSources, setPrefSources] = useState<PrefSource[]>(initialValue);
 	const updatePrefSource = useCallback(
 		(newPrefSource: PrefSource) => {
 			setPrefSources(

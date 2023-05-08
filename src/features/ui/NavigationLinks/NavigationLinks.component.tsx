@@ -10,10 +10,14 @@ export function NavigationLinks() {
 	const { isNavigationOpen } = useContextAndErrorIfNull(NavigationContext);
 
 	return (
-		<ul className={clsx(styles.navLinks, isNavigationOpen && styles.expanded)}>
-			<li>
-				<Link href="/">ホーム</Link>
-			</li>
-		</ul>
+		<aside className={styles.module}>
+			<ul
+				className={clsx(styles.navLinks, isNavigationOpen && styles.expanded)}
+			>
+				<li>
+					<Link href="/">ホーム</Link>
+				</li>
+			</ul>
+		</aside>
 	);
 }

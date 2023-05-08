@@ -9,6 +9,7 @@ import {
 	Tooltip,
 } from 'recharts';
 
+import styles from './styles.module.css';
 import { useWindowWidth } from './useWindowDimensions';
 
 import { PrefSource } from '@/types/dataType';
@@ -71,8 +72,14 @@ export function LineChartGraph({ prefSources }: Props) {
 
 	const da = mergeObjects(data);
 	const d = sortArray(da);
+	const bestWidth = windowWidth >= 900 ? 500 : windowWidth - 16;
 	return (
-		<LineChart width={windowWidth * 0.8} height={500} data={d}>
+		<LineChart
+			width={bestWidth}
+			height={500}
+			data={d}
+			className={styles.module}
+		>
 			<CartesianGrid strokeDasharray="2 2" />
 			<XAxis dataKey="year" interval="preserveStartEnd" />
 			<YAxis interval="preserveStartEnd" />
