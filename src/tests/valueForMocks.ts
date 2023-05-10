@@ -24,7 +24,7 @@ export const prefSources: PrefSource[] = [
 				],
 			},
 			{
-				label: '生産人口',
+				label: '生産年齢人口',
 				data: [
 					{
 						year: 1990,
@@ -37,7 +37,7 @@ export const prefSources: PrefSource[] = [
 				],
 			},
 		],
-		isSelected: false,
+		isSelected: true,
 	},
 	{
 		boundaryYear: 2020,
@@ -62,7 +62,7 @@ export const prefSources: PrefSource[] = [
 				],
 			},
 			{
-				label: '生産人口',
+				label: '生産年齢人口',
 				data: [
 					{
 						year: 1990,
