@@ -18,3 +18,7 @@ export type PrefSource = BasicPrefInfo & {
 	data: LabeledPopulationData[] | null;
 	isSelected: boolean;
 };
+
+export type GraphData = ({
+	year: number;
+} & Record<string, number>)[];
