@@ -2,7 +2,6 @@
 	position: relative;
 	padding-left: 2rem;
 	margin-bottom: 10px;
-	cursor: pointer;
 	transition: all 0.2s ease-out;
 }
 
@@ -50,6 +49,10 @@
 
 input[type='checkbox']:focus:not(:checked) + .checkbox::before {
 	border-color: orange;
+}
+
+.label {
+	cursor: pointer;
 }
 
 .label:hover
