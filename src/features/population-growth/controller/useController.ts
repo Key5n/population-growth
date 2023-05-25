@@ -1,8 +1,8 @@
 import { PopulationContext } from '../PopulationContext';
 
 import { LoadingContext } from '@/features/ui/Loading/LoadingContext';
-import { api } from '@/lib/api';
 import { useContextAndErrorIfNull } from '@/lib/context/useContextAndErrorIfNull';
+import { resasApi } from '@/lib/resasApi';
 import { PopulationPrefAPIResponse } from '@/types/apiType';
 import { PrefSource } from '@/types/dataType';
 
@@ -16,22 +16,10 @@ export function useController() {
 		if (data !== null) {
 			throw new Error('Data already exist');
 		}
-		const apiKey = process.env.NEXT_PUBLIC_RESAS_API_KEY;
-		if (typeof apiKey === 'undefined') {
-			throw new Error('RESAS API KEY is undefined');
-		}
-		const option: RequestInit = {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'x-api-key': apiKey,
-			},
-		};
-		const populationPrefAPIEndPoint = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${prefCode}`;
+		const populationPrefAPIEndPoint = `population/composition/perYear?cityCode=-&prefCode=${prefCode}`;
 		setLoadingState(true);
-		const res = await api<PopulationPrefAPIResponse>(
-			populationPrefAPIEndPoint,
-			option
+		const res = await resasApi<PopulationPrefAPIResponse>(
+			populationPrefAPIEndPoint
 		);
 		setLoadingState(false);
 		const newPrefSource: PrefSource = {
