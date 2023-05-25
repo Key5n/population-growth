@@ -7,8 +7,8 @@ import {
 	PopulationGrowthContextType,
 } from './PopulationContext';
 
-import { api } from '@/lib/api';
 import { useContextAndErrorIfNull } from '@/lib/context/useContextAndErrorIfNull';
+import { resasApi } from '@/lib/resasApi';
 import {
 	BasicPrefInfoAPIResponse,
 	PopulationPrefAPIResponse,
@@ -22,27 +22,15 @@ export function useInitialFetch() {
 
 	useEffect(() => {
 		(async () => {
-			const apiKey = process.env.NEXT_PUBLIC_RESAS_API_KEY;
-			if (typeof apiKey === 'undefined') {
-				throw new Error('RESAS API KEY is undefined');
-			}
-			const option: RequestInit = {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					'x-api-key': apiKey,
-				},
-			};
 			// 初期値は東京
-			const CodeOfTokyo = 13;
-			const basicInformationEndPoint =
-				'https://opendata.resas-portal.go.jp/api/v1/prefectures';
-			const populationPrefAPIEndPoint = `https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${CodeOfTokyo}`;
+			const CODE_OF_TOKYO = 13;
+			const basicInformationEndPoint = 'prefectures';
+			const populationPrefAPIEndPoint = `population/composition/perYear?cityCode=-&prefCode=${CODE_OF_TOKYO}`;
 			setLoadingState(true);
 			// 県のID、名前の情報と県の人口推移は別のルートから取る必要あり
 			const res = await Promise.all([
-				api<BasicPrefInfoAPIResponse>(basicInformationEndPoint, option),
-				api<PopulationPrefAPIResponse>(populationPrefAPIEndPoint, option),
+				resasApi<BasicPrefInfoAPIResponse>(basicInformationEndPoint),
+				resasApi<PopulationPrefAPIResponse>(populationPrefAPIEndPoint),
 			]);
 			setLoadingState(false);
 
@@ -50,7 +38,7 @@ export function useInitialFetch() {
 			const populationPrefRespnse = res[1];
 			const basicData: PrefSource[] = basicPrefInfoResponse.result.map(
 				(prefInfo) => {
-					const isTokyo = prefInfo.prefCode === CodeOfTokyo;
+					const isTokyo = prefInfo.prefCode === CODE_OF_TOKYO;
 					return {
 						prefCode: prefInfo.prefCode,
 						prefName: prefInfo.prefName,
