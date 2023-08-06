@@ -19,7 +19,7 @@ RESAS APIから都道府県の人口のデータを取得;
 ```mermaid
 sequenceDiagram
     participant resas as RESAS API サーバー
-    actor c as クライアント
+    actor c as ユーザー
     participant w as Webサーバー
     c->>w: サイトを訪問
     w->>c: HTML, CSS, JavaScript ファイルを送信
@@ -28,10 +28,12 @@ sequenceDiagram
     resas-->>c: すべての都道府県の基本データを送信
     resas-->>c: 東京の人口データを送信
     c->>c: 東京の人口データをメモリにキャッシュ
-    c->>c: 人口情報が未取得の都道府県のチェックボックスを選択
-    c->>resas: その都道府県の人口情報をリクエスト
-    resas-->>c: その都道府県の人口情報を送信
-    c->>c: fetchした人口情報をキャッシュ
+    loop ユーザーが都道府県のチェックボックスを選択するごと
+	c->>c: 人口情報が未取得の都道府県のチェックボックスを選択
+	c->>resas: その都道府県の人口情報をリクエスト
+	resas-->>c: その都道府県の人口情報を送信
+	c->>c: fetchした人口情報をキャッシュ
+    end
 ```
 
 ### グラフコントロール時
