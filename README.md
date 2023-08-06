@@ -1,7 +1,7 @@
 # What's this?
 
 都道府県ごとの人口推移グラフを表示するサービスです。
-データは RESAS API から取得しています。
+データは [RESAS API](https://opendata.resas-portal.go.jp/) から取得しています。
 
 # 仕様
 
